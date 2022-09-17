@@ -4,71 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
-        table{
-            margin: 40px 20px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: 600;
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
+    <title>Sword of the Abyss - Admin</title>
 </head>
 <body>
-    
-    <h1>Essa página só o admin verá</h1>
-    <table border="1">
-        <caption><b>Opções de filtragem por data e/ou tipo</b></caption>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Título</th>
-                <th>Data</th>
-                <th>Tipo</th>
-                <th>Status</th>
-                <th>Descrição</th>
-                <th>Contato</th>
-            </tr>
-        </thead>
-        <tbody  id="tbody">
-            <tr>
-                <td>1</td>
-                <td>Espada sem dano</td>
-                <td>14/09/22 14:32</td>
-                <td>Bug</td>
-                <td style="color:#ffff00;">Pendente</td>
-                <td>A espada X não está causando dano na missão Y</td>
-                <td>fulano@gmail.com</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Adicionar personagem</td>
-                <td>10/08/22 15:00</td>
-                <td>Sugestão</td>
-                <td style="color:#00ff00;">Resolvido</td>
-                <td>Colocar um personagem ruivo na loja de armas</td>
-                <td>fulano@gmail.com</td>
-            </tr>
-            <tr>
-                <td>Etc</td>
-                <td>Etc</td>
-                <td>Etc</td>
-                <td>Etc</td>
-                <td style="color:#ff0000;">Negado</td>
-                <td>Etc</td>
-                <td>Etc@gmail.com</td>
-            </tr>
-        </tbody>
-        <tfoot id="Rodapé">
-            <td colspan="7"><b>Criar a tabela usando DOM através do metodo get no db</b></td>
-        </tfoot>
-    </table>
-
-    <a href="https://mauro-domingues.github.io/Sword-of-the-abyss/">Voltar para a página do Cliente</a>
+    <header>
+        <h3>Administrador de tickets de bugs e sugestões</h3>
+    </header>
+    <main>
+        <div class="filter-controller">
+            <select class="action">
+                <option>- Selecione uma ação -</option>
+                <option>Buscar</option>
+                <option>Editar Status</option>
+                <option>Deletar</option>
+            </select>
+            <select class="filter" disabled>
+                <option>- Selecione um filtro -</option>
+                <option>Tudo</option>
+                <option>Status</option>
+                <option>Id</option>
+            </select>
+            <select class="status" disabled>
+                <option>- Selecione o status -</option>
+                <option>Resolvido</option>
+                <option>Pendente</option>
+                <option>Não Resolvido</option>
+            </select>
+            <input type="text" class="argument" placeholder=" Aguardando comandos" disabled>
+            <button class="apply">Aplicar</button>
+        </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Descrição</th>
+                    <th>Contato</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Espada sem dano</td>
+                    <td>14/09/22 14:32</td>
+                    <td>Bug</td>
+                    <td>Pendente</td>
+                    <td>A espada X não está causando dano na missão Y</td>
+                    <td>fulano@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Adicionar personagem</td>
+                    <td>10/08/22 15:00</td>
+                    <td>Sugestão</td>
+                    <td>Resolvido</td>
+                    <td>Colocar um personagem ruivo na loja de armas</td>
+                    <td>fulano@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Negado</td>
+                    <td>Etc</td>
+                    <td>Etc@gmail.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
     <script type="module" src="./script.js"></script>
 </body>
 </html>
