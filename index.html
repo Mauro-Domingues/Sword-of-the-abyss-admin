@@ -13,24 +13,32 @@
     </header>
     <main>
         <div class="filter-controller">
-            <select class="action">
-                <option>- Selecione uma ação -</option>
-                <option>Buscar</option>
-                <option>Editar Status</option>
-                <option>Deletar</option>
-            </select>
-            <select class="filter" disabled>
-                <option>- Selecione um filtro -</option>
-                <option>Tudo</option>
-                <option>Status</option>
-                <option>Id</option>
-            </select>
-            <select class="status" disabled>
-                <option>- Selecione o status -</option>
-                <option>Resolvido</option>
-                <option>Pendente</option>
-                <option>Não Resolvido</option>
-            </select>
+            <div class="select-container">
+                <select class="action">
+                    <option>- Selecione uma ação -</option>
+                    <option>Buscar</option>
+                    <option>Editar Status</option>
+                    <option>Deletar</option>
+                </select>
+                <select class="filter" disabled>
+                    <option>- Selecione um filtro -</option>
+                    <option>Tudo</option>
+                    <option>Status</option>
+                    <option>Tag</option>
+                    <option>Id</option>
+                </select>
+                <select class="status" disabled>
+                    <option>- Selecione o status -</option>
+                    <option>Resolvido</option>
+                    <option>Pendente</option>
+                    <option>Não Resolvido</option>
+                </select>
+                <select class="tag" disabled>
+                    <option>- Selecione a tag -</option>
+                    <option>Sugestão</option>
+                    <option>Bug</option>
+                </select>
+            </div>
             <input type="text" class="argument" placeholder=" Aguardando comandos" disabled>
             <button class="apply">Aplicar</button>
         </div>
@@ -52,7 +60,7 @@
                     <td>Espada sem dano</td>
                     <td>14/09/22 14:32</td>
                     <td>Bug</td>
-                    <td>Pendente</td>
+                    <td class="stn">Pendente</td>
                     <td>A espada X não está causando dano na missão Y</td>
                     <td>fulano@gmail.com</td>
                 </tr>
@@ -61,7 +69,7 @@
                     <td>Adicionar personagem</td>
                     <td>10/08/22 15:00</td>
                     <td>Sugestão</td>
-                    <td>Resolvido</td>
+                    <td class="stn">Resolvido</td>
                     <td>Colocar um personagem ruivo na loja de armas</td>
                     <td>fulano@gmail.com</td>
                 </tr>
@@ -70,7 +78,88 @@
                     <td>Etc</td>
                     <td>Etc</td>
                     <td>Etc</td>
-                    <td>Negado</td>
+                    <td class="stn">Não Resolvido</td>
+                    <td>Etc</td>
+                    <td>Etc@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Espada sem dano</td>
+                    <td>14/09/22 14:32</td>
+                    <td>Bug</td>
+                    <td class="stn">Pendente</td>
+                    <td>A espada X não está causando dano na missão Y</td>
+                    <td>fulano@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Adicionar personagem</td>
+                    <td>10/08/22 15:00</td>
+                    <td>Sugestão</td>
+                    <td class="stn">Resolvido</td>
+                    <td>Colocar um personagem ruivo na loja de armas</td>
+                    <td>fulano@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td class="stn">Não Resolvido</td>
+                    <td>Etc</td>
+                    <td>Etc@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Espada sem dano</td>
+                    <td>14/09/22 14:32</td>
+                    <td>Bug</td>
+                    <td class="stn">Pendente</td>
+                    <td>A espada X não está causando dano na missão Y</td>
+                    <td>fulano@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Adicionar personagem</td>
+                    <td>10/08/22 15:00</td>
+                    <td>Sugestão</td>
+                    <td class="stn">Resolvido</td>
+                    <td>Colocar um personagem ruivo na loja de armas</td>
+                    <td>fulano@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td class="stn">Não Resolvido</td>
+                    <td>Etc</td>
+                    <td>Etc@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Espada sem dano</td>
+                    <td>14/09/22 14:32</td>
+                    <td>Bug</td>
+                    <td class="stn">Pendente</td>
+                    <td>A espada X não está causando dano na missão Y</td>
+                    <td>fulano@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Adicionar personagem</td>
+                    <td>10/08/22 15:00</td>
+                    <td>Sugestão</td>
+                    <td class="stn">Resolvido</td>
+                    <td>Colocar um personagem ruivo na loja de armas</td>
+                    <td>fulano@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td>Etc</td>
+                    <td class="stn">Não Resolvido</td>
                     <td>Etc</td>
                     <td>Etc@gmail.com</td>
                 </tr>

@@ -5,12 +5,9 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-html{
-    min-width: 820px;
-}
-
 body{
     width: 100%;
+    min-width: 340px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -50,9 +47,16 @@ main{
 
 .filter-controller{
     display: flex;
+    flex-direction: column;
     width: 97%;
-    gap: 10px;
     padding: 10px;
+    gap: 5px;
+}
+
+.select-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
 }
 
 .action, .filter, button{
@@ -77,4 +81,10 @@ thead th{
 tbody td{
     padding: 1px;
     color: #333;
+}
+
+@media (max-width: 670px){
+    header h3{
+        padding-left: 120px;
+    }
 }
