@@ -21,7 +21,6 @@ function colors() {
             break
             default:
         }
-        console.log(situation.innerHTML)
     }
 }
 
