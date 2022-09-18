@@ -5,7 +5,6 @@ const tag = document.querySelector(".tag")
 const stn = document.querySelectorAll(".stn")
 const argument = document.querySelector(".argument")
 const apply = document.querySelector(".apply")
-const url = "http://127.0.0.1:3000"
 
 function colors() {
     for (let situation of stn){
@@ -23,7 +22,6 @@ function colors() {
         }
     }
 }
-
 colors()
 
 action.addEventListener("change", () => {
@@ -112,66 +110,71 @@ action.addEventListener("change", () => {
 })
 
 apply.addEventListener("click", async () => {
-
-    /*Fetch na api*/
-
+    let params = {}
     switch(action.value) {
         case "Buscar":
             switch(filter.value){
                 case "Status":
-                    /* getBySatus{
-                        "status" : `${ticketStatus.value}`,
-                        "method" : "GET"
-                    }*/
+                    params = {
+                        method: 'GET',
+                        headers: new Headers(),
+                        body: {'status' : `${ticketStatus.value}`},
+                        mode: 'no-cors'
+                    }
                 break
                 case "Tag":
-                    /* getByTag{
-                        "type" : `${tag.value}`,
-                        "method" : "GET"
-                    }*/
+                    params = {
+                        method: 'GET',
+                        headers: new Headers(),
+                        body: {'type' : `${tag.value}`},
+                        mode: 'no-cors'
+                    }
                 break
                 case "Id":
-                    /* getById{
-                        "id" : `${argument.value}`,
-                        "method" : "GET"
-                    }*/
+                    params = {
+                        method: 'GET',
+                        headers: new Headers(),
+                        body: {'id' : `${argument.value}`},
+                        mode: 'no-cors'
+                    }
                 break
                 default:
-                    // get all
+                    params = {
+                        method: 'GET',
+                        headers: new Headers(),
+                        mode: 'no-cors'
+                    }
                 break
             }
         break
         case "Editar Status":
-            /* put{
-                "id" : `${argument.value}`
-                "status" : `${ticketStatus.value}`,
-                "method" : "PUT"
-            */
+            params = {
+                method: 'PUT',
+                headers: new Headers(),
+                body: {
+                    'id' : `${argument.value}`,
+                    'status' : `${ticketStatus.value}`
+                },
+                mode: 'cors'
+            }
         break
         case "Deletar":
-            /* delete{
-                "id" : `${argument.value}`,
-                "method" : "DELETE"
-            */
+            params = {
+                method: 'DELETE',
+                headers: new Headers(),
+                body: {
+                    'id' : `${argument.value}`,
+                },
+                mode: 'cors'
+            }
         break
         default:
-            /**/
         break
     }
-
-    // Retorna os dados {id, title, data, type, status, description, contact} para o acumulator que insere na tabela
-
-    /*
+    const url = id => `http://127.0.0.1:3000/ticket/${id}`
     const ticketPromises = () => Array(50).fill().map((_, i) =>
-    fetch(getTicketUrl(i + 1)).then(response => response.json()));
-    const listTickets = tickets => tickets.reduce((accumulator, {id, title, data, type, status, description, contact}) => {
-        id = tickets.map((ticket) => ticket.id)
-        title = tickets.map((ticket) => ticket.title)
-        data = tickets.map((ticket) => ticket.data)
-        type = tickets.map((ticket) => ticket.type)
-        status = tickets.map((ticket) => ticket.status)
-        description = tickets.map((ticket) => ticket.description)
-        contact = tickets.map((ticket) => ticket.contact)
+    fetch(url(i + 1), params).then(response => response))
+    const listTickets = ticket => ticket.reduce((accumulator, {id, title, data, type, status, description, contact}) => {
         accumulator += `
                         <tr>
                         <td>${id}</td>
@@ -184,14 +187,10 @@ apply.addEventListener("click", async () => {
                         </tr>`
         return accumulator
     },"")
-
-    const buildList = tickets => {
+    const buildList = ticket => {
         const tbody = document.querySelector("tbody")
-        tbody.innerHTML = listTickets
+        tbody.innerHTML = ticket
     }
-
-    Promise.all(ticketPromises()).then(listTickets).then(buildList)*/
-
+    Promise.all(ticketPromises()).then(listTickets).then(buildList)
     colors()
 })
-
