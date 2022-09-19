@@ -98,6 +98,18 @@ tbody td{
     text-shadow: 0.5px 0.5px 1px #333;
 }
 
+.Resolvido {
+    color: #05df05;
+}
+
+.Pendente {
+    color: #efef00;
+}
+
+.Não {
+    color: #ef0505;
+}
+
 @media (max-width: 670px){
     header h3{
         padding-left: 120px;
