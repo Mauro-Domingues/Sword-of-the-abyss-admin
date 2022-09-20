@@ -119,7 +119,6 @@ apply.addEventListener("click", async () => {
                 break
                 default:
                     url = null
-                    params = null
                 break
             }
         break
@@ -137,29 +136,28 @@ apply.addEventListener("click", async () => {
         break
         default:
             url = null
-            params = null
         break
     } 
     setTimeout(() => {
-    fetch(url, params).then(response => response.json()).then(ticket =>
-        document.querySelector("tbody").innerHTML = ticket.reduce((accumulator, obj) => {
-            const data = new Date(Date.parse(obj.data))
-            let day = data.getDate()
-            let month = data.getMonth()
-            const year = data.getFullYear()
-            day < 10 ? day = `0${day}` : false	
-            month < 10 ? month = `0${month}` : false	
-            accumulator += `<tr>
-                            <td>${obj.id}</td>
-                            <td>${obj.title}</td>
-                            <td>${day}/${month}/${year}</td>
-                            <td>${obj.type}</td>
-                            <td class="${obj.status} stn">${obj.status}</td>
-                            <td>${obj.description}</td>
-                            <td>${obj.contact}</td>
-                            </tr>`
-            return accumulator   
-        },"") 
-    )
+        fetch(url, params).then(response => response.json()).then(ticket =>
+            document.querySelector("tbody").innerHTML = ticket.reduce((accumulator, obj) => {
+                const data = new Date(Date.parse(obj.data))
+                let day = data.getDate()
+                let month = data.getMonth()
+                const year = data.getFullYear()
+                day < 10 ? day = `0${day}` : false	
+                month < 10 ? month = `0${month}` : false	
+                accumulator += `<tr>
+                                <td>${obj.id}</td>
+                                <td>${obj.title}</td>
+                                <td>${day}/${month}/${year}</td>
+                                <td>${obj.type}</td>
+                                <td class="${obj.status} stn">${obj.status}</td>
+                                <td>${obj.description}</td>
+                                <td>${obj.contact}</td>
+                                </tr>`
+                return accumulator   
+            },"") 
+        )
     }, 10)
 })
