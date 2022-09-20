@@ -106,11 +106,11 @@ apply.addEventListener("click", async () => {
                     params = {method: 'GET', headers: new Headers()}
                 break
                 case "Status":
-                    url = `${url}${ticketStatus.value}`
+                    url = `${url}status/${ticketStatus.value}`
                     params = {method: 'GET', headers: new Headers()}
                 break
                 case "Tag":
-                    url = `${url}${tag.value}`
+                    url = `${url}type/${tag.value}`
                     params = {method: 'GET', headers: new Headers()}
                 break
                 case "Id":
