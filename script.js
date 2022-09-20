@@ -97,16 +97,13 @@ action.addEventListener("change", () => {
 })
 
 apply.addEventListener("click", async () => {
+    let url = "http://localhost:3000/ticket/"
     let params = {}
-    
     switch(action.value) {
         case "Buscar":
             switch(filter.value){
                 case "Tudo":
-                    params = {
-                        method: 'GET',
-                        headers: new Headers(),
-                    }
+                    params = {method: 'GET', headers: new Headers()}
                 break
                 case "Status":
                     params = {
@@ -123,19 +120,18 @@ apply.addEventListener("click", async () => {
                     }
                 break
                 case "Id":
-                    params = {
-                        method: 'GET',
-                        headers: new Headers(),
-                        body: {'id' : `${argument.value}`},
-                    }
+                    url = `${url}${argument.value}`
+                    params = {method: 'GET', headers: new Headers()}
                 break
                 default:
+                    url = null
+                    params = null
                 break
             }
         break
         case "Editar Status":
-            fetch(`${baseUrl}${argument.value}`,{
-                method: 'GET',
+            fetch(`http://localhost:3000/ticket/5`, {
+                method: 'PUT',
                 headers: new Headers(),
                 body: JSON.stringify(
                     { 'status': `${ticketStatus.value}`}
@@ -143,48 +139,30 @@ apply.addEventListener("click", async () => {
             })
         break
         case "Deletar":
-            fetch(`${baseUrl}${argument.value}`,{
+            fetch(`${url}${argument.value}`, {
                 method: 'DELETE',
-                headers: new Headers(),
+                headers: new Headers()  
             })
         break
         default:
+            url = null
+            params = null
         break
     } 
-
-    //const baseUrl = "http://localhost:3000/ticket/"
-    //const data = fetch(baseUrl).then(response => response.json())
-
-    const url = (id) => `http://localhost:3000/ticket/${id}`
-    const ticketPromises = () => Array(36).fill().map((_, i) =>
-    fetch(url(i + 1)).then(response => response.json()))
-
-    const listTickets = ticket => ticket.reduce((accumulator, obj) => {
-        const id = obj.map((obj) => obj.id)
-        const title = obj.map((obj) => obj.title)
-        const data = obj.map((obj) => obj.data)
-        const type = obj.map((obj) => obj.type)
-        const status = obj.map((obj) => obj.status)
-        const description = obj.map((obj) => obj.description)
-        const contact = obj.map((obj) => obj.contact)
-        //if(id == ""){
-        //    console.log("a")
-        //} else{
-        accumulator += `<tr>
-                        <td>${id}</td>
-                        <td>${title}</td>
-                        <td>${data}</td>
-                        <td>${type}</td>
-                        <td class="${status} stn">${status}</td>
-                        <td>${description}</td>
-                        <td>${contact}</td>
-                        </tr>`
-        return accumulator
-        //}
-    },"")
-    const buildList = ticket => {
-        const tbody = document.querySelector("tbody")
-        tbody.innerHTML = ticket
-    }
-    Promise.all(ticketPromises()).then(listTickets).then(buildList)
+    setTimeout(() => {
+    fetch(url, params).then(response => response.json()).then(ticket =>
+        document.querySelector("tbody").innerHTML = ticket.reduce((accumulator, obj) => {
+            accumulator += `<tr>
+                            <td>${obj.id}</td>
+                            <td>${obj.title}</td>
+                            <td>${obj.data}</td>
+                            <td>${obj.type}</td>
+                            <td class="${obj.status} stn">${obj.status}</td>
+                            <td>${obj.description}</td>
+                            <td>${obj.contact}</td>
+                            </tr>`
+            return accumulator   
+        },"") 
+    )
+    }, 10)
 })
