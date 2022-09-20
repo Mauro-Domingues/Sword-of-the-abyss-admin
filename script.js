@@ -97,7 +97,7 @@ action.addEventListener("change", () => {
 })
 
 apply.addEventListener("click", async () => {
-    let url = "http://localhost:3000/ticket/Pendente"
+    let url = "http://localhost:3000/ticket/"
     let params = {}
     switch(action.value) {
         case "Buscar":
