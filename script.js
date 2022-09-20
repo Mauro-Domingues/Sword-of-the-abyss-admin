@@ -71,7 +71,7 @@ action.addEventListener("change", () => {
             tag.setAttribute("disabled", "disabled")
         break
         case "Deletar":
-            argument.placeholder = " Insira o id do ticket"
+            argument.placeholder = ` Insira o id do ticket (ou digite "Tudo" )`
             ticketStatus.value = "- Selecione o status -"
             argument.value = ""
             filter.value = "Id"
@@ -132,7 +132,11 @@ apply.addEventListener("click", async () => {
             })
         break
         case "Deletar":
-            fetch(`${url}${argument.value}`, {method: 'DELETE', headers: new Headers()})
+            if (argument.value == "Tudo"){
+                fetch(url).then(response => response.json()).then(ticket => {
+                ticket.reduce((_, index) => {fetch(`${url}${index.id}`, {method: 'DELETE', headers: new Headers()})})})
+                setTimeout(() => {location.reload()}, 1000)
+            } else{fetch(`${url}${argument.value}`, {method: 'DELETE', headers: new Headers()})}
         break
         default:
             url = null
