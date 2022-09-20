@@ -123,12 +123,11 @@ apply.addEventListener("click", async () => {
             }
         break
         case "Editar Status":
+            let ticketData = {status: `${ticketStatus.value}`}
             fetch(`${url}${argument.value}`, {
                 method: 'PUT',
-                headers: new Headers(),
-                body: JSON.stringify(
-                    { 'status': `${ticketStatus.value}`}
-                )
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(ticketData)
             })
         break
         case "Deletar":
