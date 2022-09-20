@@ -97,7 +97,7 @@ action.addEventListener("change", () => {
 })
 
 apply.addEventListener("click", async () => {
-    let url = "http://localhost:3000/ticket/"
+    let url = "http://localhost:3000/ticket/Pendente"
     let params = {}
     switch(action.value) {
         case "Buscar":
@@ -106,18 +106,12 @@ apply.addEventListener("click", async () => {
                     params = {method: 'GET', headers: new Headers()}
                 break
                 case "Status":
-                    params = {
-                        method: 'GET',
-                        headers: new Headers(),
-                        body: {'status' : `${ticketStatus.value}`},
-                    }
+                    url = `${url}${ticketStatus.value}`
+                    params = {method: 'GET', headers: new Headers()}
                 break
                 case "Tag":
-                    params = {
-                        method: 'GET',
-                        headers: new Headers(),
-                        body: {'type' : `${tag.value}`},
-                    }
+                    url = `${url}${tag.value}`
+                    params = {method: 'GET', headers: new Headers()}
                 break
                 case "Id":
                     url = `${url}${argument.value}`
@@ -130,7 +124,7 @@ apply.addEventListener("click", async () => {
             }
         break
         case "Editar Status":
-            fetch(`http://localhost:3000/ticket/5`, {
+            fetch(`${url}${argument.value}`, {
                 method: 'PUT',
                 headers: new Headers(),
                 body: JSON.stringify(
@@ -139,10 +133,7 @@ apply.addEventListener("click", async () => {
             })
         break
         case "Deletar":
-            fetch(`${url}${argument.value}`, {
-                method: 'DELETE',
-                headers: new Headers()  
-            })
+            fetch(`${url}${argument.value}`, {method: 'DELETE', headers: new Headers()})
         break
         default:
             url = null
