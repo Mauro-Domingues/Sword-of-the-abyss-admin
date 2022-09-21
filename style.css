@@ -85,6 +85,10 @@ table{
     margin-bottom: 15px;
 }
 
+table a{
+    color: #333;
+}
+
 thead th{
     padding: 2px;
     font-weight: bolder;

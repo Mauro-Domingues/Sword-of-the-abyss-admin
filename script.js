@@ -146,7 +146,7 @@ apply.addEventListener("click", async () => {
                 let month = data.getMonth()
                 const year = data.getFullYear()
                 day < 10 ? day = `0${day}` : false	
-                month < 10 ? month = `0${month}` : false	
+                month < 10 ? month = `0${month}` : false
                 accumulator += `<tr>
                                 <td>${obj.id}</td>
                                 <td>${obj.title}</td>
@@ -154,9 +154,9 @@ apply.addEventListener("click", async () => {
                                 <td>${obj.type}</td>
                                 <td class="${obj.status} stn">${obj.status}</td>
                                 <td>${obj.description}</td>
-                                <td>${obj.contact}</td>
+                                <td><a href ="mailto:${obj.contact}">${obj.contact}</a></td>
                                 </tr>`
-                return accumulator   
+                return accumulator
             },"") 
         )
     }, 10)
