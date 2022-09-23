@@ -97,13 +97,15 @@ action.addEventListener("change", () => {
 })
 
 apply.addEventListener("click", async () => {
-    let url = "https://sword-of-the-abyss-api-mauro-domingues.vercel.app/ticket/"
+    let url = "https://https-github-com-mauro-domingues-sword-of-the-abyss-api.vercel.app/ticket"
     let params = {}
     switch(action.value) {
         case "Buscar":
             switch(filter.value){
                 case "Tudo":
-                    params = {method: 'GET', headers: new Headers()}
+                    params = {method: 'GET',
+                    Headers: {'Access-Control-Allow-Header': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'}
+                }
                 break
                 case "Status":
                     url = `${url}status/${ticketStatus.value}`
@@ -131,7 +133,14 @@ apply.addEventListener("click", async () => {
             })
         break
         case "Deletar":
-            if (argument.value == null){fetch(url, {method: 'TRUNCATE', headers: new Headers()})
+            if (argument.value == 'aa'){
+                fetch(url, {
+                method: 'TRUNCATE', 
+                headers: {
+                    'Access-Control-Allow-Origin:' : 'https://mauro-domingues.github.io/Sword-of-the-abyss-admin',
+                    'Access-Control-Allow-Header': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                    "content-type": "application/json"}
+            })
             }else{fetch(`${url}${argument.value}`, {method: 'DELETE', headers: new Headers()})}
         break
         default:
