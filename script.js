@@ -97,7 +97,7 @@ action.addEventListener("change", () => {
 })
 
 apply.addEventListener("click", async () => {
-    let url = "http://localhost:3000/ticket/"
+    let url = "https://vercel.com/mauro-domingues/sword-of-the-abyss-api/HhnHAGRhFk81pk71aYCXjhgE27zu/ticket/"
     let params = {}
     switch(action.value) {
         case "Buscar":
