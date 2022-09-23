@@ -99,25 +99,28 @@ action.addEventListener("change", () => {
 apply.addEventListener("click", async () => {
     let url = "https://https-github-com-mauro-domingues-sword-of-the-abyss-api.vercel.app/ticket"
     let params = {}
+    let headers = {
+        'Access-Control-Allow-Origin:' : 'https://mauro-domingues.github.io/Sword-of-the-abyss-admin',
+        'Access-Control-Allow-Header': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+        'Content-Type': 'application/json'
+    }
     switch(action.value) {
         case "Buscar":
             switch(filter.value){
                 case "Tudo":
-                    params = {method: 'GET',
-                    Headers: {'Access-Control-Allow-Header': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'}
-                }
+                    params = {method: 'GET', headers: headers}
                 break
                 case "Status":
                     url = `${url}status/${ticketStatus.value}`
-                    params = {method: 'GET', headers: new Headers()}
+                    params = {method: 'GET', headers: headers}
                 break
                 case "Tag":
                     url = `${url}type/${tag.value}`
-                    params = {method: 'GET', headers: new Headers()}
+                    params = {method: 'GET', headers: headers}
                 break
                 case "Id":
                     url = `${url}${argument.value}`
-                    params = {method: 'GET', headers: new Headers()}
+                    params = {method: 'GET', headers: headers}
                 break
                 default:
                     url = null
@@ -126,22 +129,11 @@ apply.addEventListener("click", async () => {
         break
         case "Editar Status":
             let ticketData = {status: `${ticketStatus.value}`}
-            fetch(`${url}${argument.value}`, {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(ticketData)
-            })
+            fetch(`${url}${argument.value}`, {method: 'PUT', headers: headers, body: JSON.stringify(ticketData)})
         break
         case "Deletar":
-            if (argument.value == 'aa'){
-                fetch(url, {
-                method: 'TRUNCATE', 
-                headers: {
-                    'Access-Control-Allow-Origin:' : 'https://mauro-domingues.github.io/Sword-of-the-abyss-admin',
-                    'Access-Control-Allow-Header': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-                    "content-type": "application/json"}
-            })
-            }else{fetch(`${url}${argument.value}`, {method: 'DELETE', headers: new Headers()})}
+            if (argument.value == 'aa'){fetch(url, {method: 'TRUNCATE', headers: headers})
+            }else{fetch(`${url}${argument.value}`, {method: 'DELETE', headers: headers})}
         break
         default:
             url = null
