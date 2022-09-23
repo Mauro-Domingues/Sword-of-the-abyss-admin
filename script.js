@@ -96,7 +96,7 @@ action.addEventListener("change", () => {
     }
 })
 
-apply.addEventListener("click", async () => {
+apply.addEventListener("click", () => {
     let url = "https://https-github-com-mauro-domingues-sword-of-the-abyss-api.vercel.app/ticket/"
     let params = {}
     switch(action.value) {
