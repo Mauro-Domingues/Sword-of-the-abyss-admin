@@ -97,25 +97,25 @@ action.addEventListener("change", () => {
 })
 
 apply.addEventListener("click", () => {
-    let url = "https://https-github-com-mauro-domingues-sword-of-the-abyss-api.vercel.app/ticket/"
+    let url = "http://localhost:3000/ticket/"
     let params = {}
     switch(action.value) {
         case "Buscar":
             switch(filter.value){
                 case "Tudo":
-                    params = {method: 'GET', headers: new Headers()}
+                    params = {method: 'GET'}
                 break
                 case "Status":
                     url = `${url}status/${ticketStatus.value}`
-                    params = {method: 'GET', headers: new Headers()}
+                    params = {method: 'GET'}
                 break
                 case "Tag":
                     url = `${url}type/${tag.value}`
-                    params = {method: 'GET', headers: new Headers()}
+                    params = {method: 'GET'}
                 break
                 case "Id":
                     url = `${url}${argument.value}`
-                    params = {method: 'GET', headers: new Headers()}
+                    params = {method: 'GET'}
                 break
                 default:
                     url = null
@@ -131,7 +131,7 @@ apply.addEventListener("click", () => {
             })
         break
         case "Deletar":
-            if (argument.value == 'Todos'){
+            if (argument.value == null){
                 fetch(url, {method: 'TRUNCATE', headers: new Headers()})
             }else{fetch(`${url}${argument.value}`, {method: 'DELETE', headers: new Headers()})}
         break
