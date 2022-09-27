@@ -40,16 +40,14 @@ header h3{
     position: absolute;
     text-align: center;
     gap: 40px;
-    padding: 20px;
-    margin-top: 190px;
-    background-color: #ddd;
-    text-shadow: 0 0 2px #fff;
-    border: 1.5px dotted #000;
+    padding: 43px 53px;
+    margin-top: 164px;
+    background-color: #eee;
+    text-shadow: 0 0 3px #fff;
 }
 
 .alert h3{
     color: #f00;
-    text-shadow: 0 0 1px #000;
     margin-bottom: 20px;
 }
 
@@ -61,9 +59,9 @@ article{
     max-height: 150px;
     padding: 20px;
     margin-top: 100px;
-    background-color: #ddd;
+    background-color: #eee;
     text-shadow: 0 0 2px #fff;
-    border: 1.5px dotted #000;
+    border: 3.5px double #000;
 }
 
 .auth{
@@ -76,6 +74,10 @@ article{
 
 .auth input{
     height: 22px;
+}
+
+.auth-button{
+    padding: 5px 15px;
 }
 
 main{
