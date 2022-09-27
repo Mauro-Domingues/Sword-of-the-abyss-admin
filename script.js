@@ -96,8 +96,8 @@ action.addEventListener("change", () => {
     }
 })
 
-apply.addEventListener("click", () => {
-    let url = "http://localhost:3000/ticket/"
+apply.addEventListener("click", async() => {
+    let url = "url da API/ticket/"
     let params = {}
     switch(action.value) {
         case "Buscar":
@@ -124,41 +124,34 @@ apply.addEventListener("click", () => {
         break
         case "Editar Status":
             let ticketData = {status: `${ticketStatus.value}`}
-            fetch(`${url}${argument.value}`, {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(ticketData)
-            })
+            await fetch(`${url}${argument.value}`, {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(ticketData)})
         break
         case "Deletar":
-            if (argument.value == null){
-                fetch(url, {method: 'TRUNCATE', headers: new Headers()})
-            }else{fetch(`${url}${argument.value}`, {method: 'DELETE', headers: new Headers()})}
+            if (argument.value == null){await fetch(url, {method: 'TRUNCATE'})
+            }else{await fetch(`${url}${argument.value}`, {method: 'DELETE'})}
         break
         default:
             url = null
         break
     } 
-    setTimeout(() => {
-        fetch(url, params).then(response => response.json()).then(ticket =>
-            document.querySelector("tbody").innerHTML = ticket.reduce((accumulator, obj) => {
-                const data = new Date(Date.parse(obj.data))
-                let day = data.getDate()
-                let month = data.getMonth()
-                const year = data.getFullYear()
-                day < 10 ? day = `0${day}` : false	
-                month < 10 ? month = `0${month}` : false
-                accumulator += `<tr>
-                                <td>${obj.id}</td>
-                                <td>${obj.title}</td>
-                                <td>${day}/${month}/${year}</td>
-                                <td>${obj.type}</td>
-                                <td class="${obj.status} stn">${obj.status}</td>
-                                <td>${obj.description}</td>
-                                <td><a href ="mailto:${obj.contact}">${obj.contact}</a></td>
-                                </tr>`
-                return accumulator
-            },"") 
-        )
-    }, 10)
+    fetch(url, params).then(response => response.json()).then(ticket =>
+        document.querySelector("tbody").innerHTML = ticket.reduce((accumulator, obj) => {
+            const data = new Date(Date.parse(obj.data))
+            let day = data.getDate()
+            let month = data.getMonth()
+            const year = data.getFullYear()
+            day < 10 ? day = `0${day}` : false	
+            month < 10 ? month = `0${month}` : false
+            accumulator += `<tr>
+                            <td>${obj.id}</td>
+                            <td>${obj.title}</td>
+                            <td>${day}/${month}/${year}</td>
+                            <td>${obj.type}</td>
+                            <td class="${obj.status} stn">${obj.status}</td>
+                            <td>${obj.description}</td>
+                            <td><a href ="mailto:${obj.contact}">${obj.contact}</a></td>
+                            </tr>`
+            return accumulator
+        },"") 
+    )
 })
