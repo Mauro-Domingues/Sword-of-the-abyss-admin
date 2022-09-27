@@ -11,6 +11,20 @@
         <header>
             <h3>Administrador de tickets de bugs e sugestões</h3>
         </header>
+        <div class="alert">
+            <h3>Falha na autenticação!</h3>
+            <h4>Os dados não coincidem.<br>Tente novamente em <br><span class="seconds"></span> segundos.</h4>
+        </div>
+        <article>
+            <h3>Você precisa autenticar</h3>
+            <div class="auth">
+                <label for="user">Usuário:</label>
+                <input type="text" id="user">
+                <label for="pass">Senha:</label>
+                <input type="text" id="pass">
+            </div>
+            <button class="auth-button">Entrar</button>
+        </article>
         <main>
             <div class="filter-controller">
                 <div class="select-container">

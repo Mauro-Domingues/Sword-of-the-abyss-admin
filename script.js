@@ -1,10 +1,15 @@
+import {validation} from './validation.js'
+
 const action = document.querySelector(".action")
 const filter = document.querySelector(".filter")
 const ticketStatus = document.querySelector(".status")
 const tag = document.querySelector(".tag")
-const stn = document.querySelectorAll(".stn")
 const argument = document.querySelector(".argument")
 const apply = document.querySelector(".apply")
+
+document.querySelector(".auth-button").addEventListener("click", () => {
+    validation()
+})
 
 action.addEventListener("change", () => {
     switch(action.value) {
