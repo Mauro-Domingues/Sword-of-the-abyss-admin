@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Sword of the Abyss - Admin</title>
-</head>
-<body>
-    <header>
-        <h3>Administrador de tickets de bugs e sugestões</h3>
-    </header>
-    <main>
-        <div class="filter-controller">
-            <div class="select-container">
-                <select class="action">
-                    <option>- Selecione uma ação -</option>
-                    <option>Buscar</option>
-                    <option>Editar Status</option>
-                    <option>Deletar</option>
-                </select>
-                <select class="filter" disabled>
-                    <option>- Selecione um filtro -</option>
-                    <option>Tudo</option>
-                    <option>Status</option>
-                    <option>Tag</option>
-                    <option>Id</option>
-                </select>
-                <select class="status" disabled>
-                    <option>- Selecione o status -</option>
-                    <option>Resolvido</option>
-                    <option>Pendente</option>
-                    <option>Não Resolvido</option>
-                </select>
-                <select class="tag" disabled>
-                    <option>- Selecione a tag -</option>
-                    <option>Sugestão</option>
-                    <option>Bug</option>
-                </select>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css">
+        <title>Sword of the Abyss - Admin</title>
+    </head>
+    <body>
+        <header>
+            <h3>Administrador de tickets de bugs e sugestões</h3>
+        </header>
+        <main>
+            <div class="filter-controller">
+                <div class="select-container">
+                    <select class="action">
+                        <option>- Selecione uma ação -</option>
+                        <option>Buscar</option>
+                        <option>Editar Status</option>
+                        <option>Deletar</option>
+                    </select>
+                    <select class="filter" disabled>
+                        <option>- Selecione um filtro -</option>
+                        <option>Tudo</option>
+                        <option>Status</option>
+                        <option>Tag</option>
+                        <option>Id</option>
+                    </select>
+                    <select class="status" disabled>
+                        <option>- Selecione o status -</option>
+                        <option>Resolvido</option>
+                        <option>Pendente</option>
+                        <option>Não Resolvido</option>
+                    </select>
+                    <select class="tag" disabled>
+                        <option>- Selecione a tag -</option>
+                        <option>Sugestão</option>
+                        <option>Bug</option>
+                    </select>
+                </div>
+                <input type="text" class="argument" placeholder=" Aguardando comandos" disabled>
+                <button class="apply">Aplicar</button>
             </div>
-            <input type="text" class="argument" placeholder=" Aguardando comandos" disabled>
-            <button class="apply">Aplicar</button>
-        </div>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Título</th>
-                    <th>Data</th>
-                    <th>Tipo</th>
-                    <th>Status</th>
-                    <th>Descrição</th>
-                    <th>Contato</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <td colspan="7"><b>Os tickets acabam aqui</b></td>
-            </tfoot>
-        </table>
-    </main>
-    <script type="module" src="./script.js"></script>
-</body>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Título</th>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Status</th>
+                        <th>Descrição</th>
+                        <th>Contato</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <td colspan="7"><b>Os tickets acabam aqui</b></td>
+                </tfoot>
+            </table>
+        </main>
+        <script type="module" src="./script.js"></script>
+    </body>
 </html>

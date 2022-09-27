@@ -103,19 +103,15 @@ apply.addEventListener("click", async() => {
         case "Buscar":
             switch(filter.value){
                 case "Tudo":
-                    params = {method: 'GET'}
                 break
                 case "Status":
                     url = `${url}status/${ticketStatus.value}`
-                    params = {method: 'GET'}
                 break
                 case "Tag":
                     url = `${url}type/${tag.value}`
-                    params = {method: 'GET'}
                 break
                 case "Id":
                     url = `${url}${argument.value}`
-                    params = {method: 'GET'}
                 break
                 default:
                     url = null
@@ -148,10 +144,10 @@ apply.addEventListener("click", async() => {
                             <td>${day}/${month}/${year}</td>
                             <td>${obj.type}</td>
                             <td class="${obj.status} stn">${obj.status}</td>
-                            <td>${obj.description}</td>
+                            <td class="description"><details><summary>Exibir descrição completa</summary>${obj.description}</details></td>
                             <td><a href ="mailto:${obj.contact}">${obj.contact}</a></td>
                             </tr>`
             return accumulator
-        },"") 
+        },"")
     )
 })
