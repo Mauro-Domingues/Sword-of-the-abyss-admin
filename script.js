@@ -97,7 +97,7 @@ action.addEventListener("change", () => {
 })
 
 apply.addEventListener("click", async() => {
-    let url = "url da API/ticket/"
+    let url = "https://sword-of-the-abyss-api.herokuapp.com/ticket"
     let params = {}
     switch(action.value) {
         case "Buscar":
