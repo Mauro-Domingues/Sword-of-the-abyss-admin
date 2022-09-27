@@ -24,7 +24,7 @@ header {
 }
 
 header h3{
-    background-image: url(./img/1337-logo.png);
+    background-image: url(../img/1337-logo.png);
     background-size: 100px;
     background-repeat: no-repeat;
     background-position: 10px center;

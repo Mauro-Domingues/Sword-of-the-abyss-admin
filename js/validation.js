@@ -6,11 +6,11 @@ const userName = document.querySelector("#user")
 const pass = document.querySelector("#pass")
 
 const users = [
-    {user: "admin0", password: "12345"},
-    {user: "admin1", password: "123456"},
-    {user: "admin2", password: "1234567"},
-    {user: "admin3", password: "12345678"},
-    {user: "admin4", password: "123456789"}
+    {user: "admin", password: "admin"},
+    {user: "admin1", password: "12345"},
+    {user: "admin2", password: "123456"},
+    {user: "admin3", password: "1234567"},
+    {user: "admin4", password: "12345678"}
 ]
 
 export function validation() {
