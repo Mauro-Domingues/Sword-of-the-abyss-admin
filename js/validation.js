@@ -22,7 +22,6 @@ export async function validation() {
         method: 'POST', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(userData)
     }).then(response => response.json()).then(data => data.map(() => {
-        console.log(data[0])
         if(data[0] === "Denied"){
             typing()
             setTimeout(() => {location.reload()}, 5500)
