@@ -4,45 +4,31 @@ const seconds = document.querySelector(".seconds")
 const article = document.querySelector("article")
 const userName = document.querySelector("#user")
 const pass = document.querySelector("#pass")
+const message = "543210"
+let i = 0;
 
-const users = [
-    {user: "admin", password: "admin"},
-    {user: "admin1", password: "12345"},
-    {user: "admin2", password: "123456"},
-    {user: "admin3", password: "1234567"},
-    {user: "admin4", password: "12345678"}
-]
+function typing(){
+    alert.style.display = "block"
+    if (i < message.length){
+        seconds.textContent = message.charAt(i)
+        i++
+        setTimeout(typing, 1000)
+    }
+}
 
-export function validation() {
-    users.map(() => {
-        let j = 0;
-        let k = 0;
-        const message = "543210"
-        function typing(){
-            alert.style.display = "block"
-            if (j < message.length){
-                seconds.textContent = message.charAt(j)
-                j++
-                setTimeout(typing, 1000)
-            }
-        }
-        for(let i = 0; i < users.length; i++){
-            if(userName.value === users[i].user){
-                if(pass.value === users[i].password){
-                    article.style.display = "none"
-                    main.style.display = "flex"
-                    break
-                }else{
-                    typing()
-                    setTimeout(() => {location.reload()}, 5500)
-                }
-            }else{
-                k++
-            }
-        }
-        if(k === users.length){
+export async function validation() {
+    let userData = {user: userName.value, password: pass.value}
+    await fetch('https://sword-of-the-abyss-api.herokuapp.com/ticket/users', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(userData)
+    }).then(response => response.json()).then(data => data.map(() => {
+        console.log(data[0])
+        if(data[0] === "Denied"){
             typing()
             setTimeout(() => {location.reload()}, 5500)
+        }else{
+            article.style.display = "none"
+            main.style.display = "flex"
         }
-    })
+    }))
 }
