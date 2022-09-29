@@ -6,7 +6,7 @@
 <ul>
     <li>usuário: admin</li>
     <li>senha: admin</li>
-</ul><br>
+</ul>
 <h4 align-items="center">Os métodos de deletar estão desativados por segurança</h4>
 
 deploy de teste: https://mauro-domingues.github.io/Sword-of-the-abyss-admin/
