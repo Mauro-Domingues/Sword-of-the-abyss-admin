@@ -151,9 +151,9 @@ async function validation() {
                         let ticketData = {status: `${ticketStatus.value}`}
                         await fetch(`${url}${argument.value}`, {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(ticketData)})
                     break
-                    case "Deletar":
-                        if (argument.value == null){await fetch(url, {method: 'TRUNCATE'})
-                        }else{await fetch(`${url}${argument.value}`, {method: 'DELETE'})}
+                    case "Deletar": alert("Por segurança os métodos de deletar estão desativados")
+                        //if (argument.value == null){await fetch(url, {method: 'TRUNCATE'})
+                        //}else{await fetch(`${url}${argument.value}`, {method: 'DELETE'})}
                     break
                     default:
                         url = null
