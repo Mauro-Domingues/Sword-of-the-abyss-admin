@@ -6,7 +6,7 @@ const userName = document.querySelector("#user")
 const pass = document.querySelector("#pass")
 const message = "543210"
 let i = 0;
-
+/*
 function typing(){
     alert.style.display = "block"
     if (i < message.length){
@@ -186,4 +186,4 @@ async function validation() {
 
 document.querySelector(".auth-button").addEventListener("click", () => {
     validation()
-})
+})*/
