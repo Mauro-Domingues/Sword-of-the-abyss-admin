@@ -187,7 +187,6 @@ async function validation() {
                 )
             })
 
-            // login usersssssssssssssssssssssssssssssss
             async function adminValidation() {
                 let userData = {user: adminUserName.value, password: adminPass.value}
                 await fetch('http://localhost:3000/user/login-admin', {
