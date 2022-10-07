@@ -4,6 +4,7 @@ const seconds = document.querySelector(".seconds")
 const article = document.querySelector(".login-article")
 const userName = document.querySelector("#user")
 const pass = document.querySelector("#pass")
+const baseUrl = 'http://localhost:3000/' // colocar o link da api aqui
 const message = "543210"
 let i = 0;
 
@@ -17,8 +18,8 @@ function typing(){
 }
 
 async function validation() {
-    let userData = {user: userName.value, password: pass.value}
-    await fetch('http://localhost:3000/user/login', {
+    let userData = {email: userName.value, password: pass.value}
+    await fetch(`${baseUrl}user/login`, {
         method: 'POST', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(userData)
     }).then(response => response.json()).then(data => data.map(() => {
@@ -105,7 +106,7 @@ async function validation() {
                         tag.setAttribute("disabled", "disabled")
                     break
                     case "Deletar":
-                        argument.placeholder = ` Insira o id do ticket (ou deixe vazio para deletar todos)`
+                        argument.placeholder = ` Insira o id do ticket (ou digite "Todos" para limpar o banco de dados)`
                         ticketStatus.value = "- Selecione o status -"
                         argument.value = ""
                         filter.value = "Id"
@@ -131,8 +132,8 @@ async function validation() {
             })
 
             apply.addEventListener("click", async() => {
-                let url = "https://sword-of-the-abyss-api.herokuapp.com/ticket/" 
-                let params = {Authorization: `${userToken.value}`}
+                let url = `${baseUrl}ticket/` 
+                let params = {headers: {'Authorization': `${userToken.innerHTML}`}}
                 switch(action.value) {
                     case "Buscar":
                         switch(filter.value){
@@ -154,12 +155,12 @@ async function validation() {
                     break
                     case "Editar Status":
                         let ticketData = {status: `${ticketStatus.value}`}
-                        await fetch(`${url}${argument.value}`, {method: 'PUT', headers: {'Authorization': `${userToken.value}`, 'Content-Type': 'application/json'}, body: JSON.stringify(ticketData)})
+                        await fetch(`${url}${argument.value}`, {method: 'PUT', headers: {'Authorization': `${userToken.innerHTML}`, 'Content-Type': 'application/json'}, body: JSON.stringify(ticketData)})
                     break
                     case "Deletar":
                         if (argument.value !== ""){
-                        if (argument.value === "Todos"){await fetch(url, {method: 'DELETE', headers: {'Authorization': `${userToken.value}`}})
-                        }else{await fetch(`${url}${argument.value}`, {method: 'DELETE', headers: {'Authorization': `${userToken.value}`}})}}
+                        if (argument.value === "Todos"){await fetch(url, {method: 'DELETE', headers: {'Authorization': `${userToken.innerHTML}`}})
+                        }else{await fetch(`${url}${argument.value}`, {method: 'DELETE', headers: {'Authorization': `${userToken.innerHTML}`}})}}
                     break
                     default:
                         url = null
@@ -188,8 +189,8 @@ async function validation() {
             })
 
             async function adminValidation() {
-                let userData = {user: adminUserName.value, password: adminPass.value}
-                await fetch('http://localhost:3000/user/login-admin', {
+                let userData = {email: adminUserName.value, password: adminPass.value}
+                await fetch(`${baseUrl}user/login-admin`, {
                     method: 'POST', headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(userData)
                 }).then(response => response.json()).then(data => data.map(() => {
@@ -210,64 +211,68 @@ async function validation() {
                         adminAction.addEventListener("change", () => {
                             switch(adminAction.value){
                                 case "Buscar usuários":
-                                    adminArgument.placeholder = " Buscar todos os usuários"
-                                    adminCEmail.placeholder = " Aguardando comandos"
                                     adminCPassword.placeholder = " Aguardando comandos"
+                                    adminArgument.placeholder = " Buscar todos os usuários"
+                                    adminCEmail.placeholder = " Aguardando comandos" 
+                                    adminCPassword.value = ""
+                                    adminArgument.value = ""
+                                    adminCEmail.value = ""  
                                     adminCEmail.setAttribute("disabled", "disabled")
                                     adminCPassword.setAttribute("disabled", "disabled")
                                     adminArgument.setAttribute("disabled", "disabled")
                                 break
-                                case "Criar usuário":
+                                case "Criar usuário":                                   
+                                    adminCPassword.placeholder = " Insira a senha"
                                     adminArgument.placeholder = " Criar usuário"
                                     adminCEmail.placeholder = " Insira o email"
-                                    adminCPassword.placeholder = " Insira a senha"
-                                    adminCEmail.removeAttribute("disabled")
-                                    adminCPassword.removeAttribute("disabled")
+                                    adminArgument.value = ""
                                     adminArgument.setAttribute("disabled", "disabled")
+                                    adminCPassword.removeAttribute("disabled")
+                                    adminCEmail.removeAttribute("disabled")  
                                 break
                                 case "Deletar usuário":
+                                    adminCPassword.placeholder = " Aguardando comandos" 
                                     adminArgument.placeholder = " Insira o id do usuário"
                                     adminCEmail.placeholder = " Aguardando comandos"
-                                    adminCPassword.placeholder = " Aguardando comandos"
-                                    adminCEmail.setAttribute("disabled", "disabled")
+                                    adminCPassword.value = ""
+                                    adminCEmail.value = ""                                 
                                     adminCPassword.setAttribute("disabled", "disabled")
+                                    adminCEmail.setAttribute("disabled", "disabled")
                                     adminArgument.removeAttribute("disabled")
                                 break
                                 default:
-                                    adminArgument.placeholder = " Aguardando comandos"
-                                    adminCEmail.placeholder = " Aguardando comandos"
                                     adminCPassword.placeholder = " Aguardando comandos"
-                                    adminCEmail.setAttribute("disabled", "disabled")
+                                    adminArgument.placeholder = " Aguardando comandos"
+                                    adminCEmail.placeholder = " Aguardando comandos"                                   
+                                    adminCPassword.value = ""
+                                    adminArgument.value = ""
+                                    adminCEmail.value = ""                                    
                                     adminCPassword.setAttribute("disabled", "disabled")
                                     adminArgument.setAttribute("disabled", "disabled")
+                                    adminCEmail.setAttribute("disabled", "disabled")
                                 break
                             }
                         })
                         adminApply.addEventListener("click", async () => {
-                            let adminUrl = 'http://localhost:3000/user/'
-                            let adminParams = {}
-                            switch(adminAction.value) {
-                                case "Buscar":
-                                    switch(filter.value){
-                                        case "Buscar usuários":
-                                            adminParams = {Authorization: `${userToken.value}`}
-                                        break
-                                        case "Criar usuário":
-                                            let userData = {user: `${adminCEmail.value}`, password: `${adminCPassword.value}`}
-                                            await fetch(adminUrl, {method: 'PUT', headers: {'Authorization': `${adminToken.value}`, 'Content-Type': 'application/json'}, body: JSON.stringify(userData)})
-                                        break
-                                        case "Deletar usuário":
-                                            if (adminArgument.value !== ""){
-                                            await fetch(`${adminUrl}${adminArgument.value}`, {method: 'DELETE', headers: {'Authorization': `${adminToken.value}`}})}
-                                        break
-                                        default:
-                                            adminUrl = null
-                                        break
-                                    }
+                            let adminUrl = `${baseUrl}user/`
+                            let adminParams = {headers: {'Authorization': `${adminToken.innerHTML}`}}
+                            switch(adminAction.value){
+                                case "Buscar usuários":
+                                break
+                                case "Criar usuário":
+                                    let adminData = {email: `${adminCEmail.value}`, password: `${adminCPassword.value}`}
+                                    await fetch(adminUrl, {method: 'POST', headers: {'Authorization': `${adminToken.innerHTML}`, 'Content-Type': 'application/json'}, body: JSON.stringify(adminData)})
+                                break
+                                case "Deletar usuário":
+                                    if (adminArgument.value !== "" && adminArgument.value !== "1"){
+                                    await fetch(`${adminUrl}${adminArgument.value}`, {method: 'DELETE', headers: {'Authorization': `${adminToken.innerHTML}`}})}
+                                break
+                                default:
+                                    adminUrl = null
                                 break
                             }
-                            fetch(adminUrl, adminParams).then(response => response.json()).then(user =>
-                                document.querySelector(".admin-tbody").innerHTML = user.reduce((accumulator, user) => {
+                            fetch(adminUrl, adminParams).then(response => response.json()).then(users =>
+                                document.querySelector(".admin-tbody").innerHTML = users.reduce((accumulator, user) => {
                                     accumulator += `<tr>
                                                     <td>${user.id}</td>
                                                     <td>${user.email}</td>
@@ -282,7 +287,17 @@ async function validation() {
             }
 
             document.querySelector(".admin-section").addEventListener("click", () => {
+                main.style.display = "none"
                 adminArticle.style.display = "flex"
+                document.querySelector(".admin-section").style.display = "none"
+                document.querySelector(".header").innerHTML = "Administrador de usuários"
+            })
+
+            document.querySelector(".return-section").addEventListener("click", () => {
+                main.style.display = "flex"
+                section.style.display = "none"
+                document.querySelector(".admin-section").style.display = "block"
+                document.querySelector(".header").innerHTML = "Administrador de tickets de bugs e sugestões"
             })
 
             document.querySelector(".admin-button").addEventListener("click", () => {

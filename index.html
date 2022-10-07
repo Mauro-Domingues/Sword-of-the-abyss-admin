@@ -10,7 +10,7 @@
     </head>
     <body>
         <header>
-            <h3>Administrador de tickets de bugs e sugestões</h3>
+            <h3 class="header">Administrador de tickets de bugs e sugestões</h3>
         </header>
         <div class="alert">
             <h3>Falha na autenticação!</h3>
@@ -27,6 +27,7 @@
         </article>
         <main>
             <div class="filter-controller">
+                <button class="admin-section">Seção do Administrador</button>
                 <div class="select-container">
                     <select class="action">
                         <option>- Selecione uma ação -</option>
@@ -74,20 +75,20 @@
                     <td colspan="7"><b>Os tickets acabam aqui</b></td>
                 </tfoot>
             </table>
-            <article class="admin-article">
-                <div class="auth">
-                    <label for="user">Usuário:</label>
-                    <input type="text" id="adminUserName">
-                    <label for="pass">Senha:</label>
-                    <input type="text" id="adminPass">
-                </div>
-                <button class="admin-button">Entrar</button>
-            </article>
-            <button class="admin-section">Seção do Administrador</button>
             <p class="userToken" style="display: none;"></p>
         </main>
+        <article class="admin-article">
+            <div class="auth">
+                <label for="user">Usuário:</label>
+                <input type="text" id="adminUserName">
+                <label for="pass">Senha:</label>
+                <input type="text" id="adminPass">
+            </div>
+            <button class="admin-button">Entrar</button>
+        </article>
         <section>
             <div class="admin-filter-controller">
+                <button class="return-section">Voltar para o administrador de tickets</button>
                 <div class="admin-select-container">
                     <select class="admin-action">
                         <option>- Selecione uma ação -</option>
