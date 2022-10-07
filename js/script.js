@@ -191,7 +191,7 @@ async function validation() {
             async function adminValidation() {
                 let userData = {email: adminUserName.value, password: adminPass.value}
                 await fetch(`${baseUrl}user/login-admin`, {
-                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    method: 'POST', headers: {'Authorization': `${userToken.innerHTML}`, 'Content-Type': 'application/json'},
                     body: JSON.stringify(userData)
                 }).then(response => response.json()).then(data => data.map(() => {
                     if(data[0] === "Falha na autenticação"){
