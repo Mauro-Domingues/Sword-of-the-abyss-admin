@@ -64,6 +64,10 @@ article{
     border: 3.5px double #000;
 }
 
+.admin-article{
+    display: none;
+}
+
 .auth{
     display: grid;
     height: fit-content;
@@ -80,7 +84,7 @@ article{
     padding: 5px 15px;
 }
 
-main{
+main, section{
     display: none;
     flex-direction: column;
     align-items: center;
@@ -90,7 +94,7 @@ main{
     background-color: #ddd;
 }
 
-.filter-controller{
+.filter-controller, .admin-filter-controller{
     display: flex;
     flex-direction: column;
     width: 97%;
@@ -98,7 +102,7 @@ main{
     gap: 5px;
 }
 
-.select-container{
+.select-container, .admin-select-container, .admin-data{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px;

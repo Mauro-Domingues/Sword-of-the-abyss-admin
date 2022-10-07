@@ -16,15 +16,14 @@
             <h3>Falha na autenticação!</h3>
             <h4>Os dados não coincidem.<br>Tente novamente em <br><span class="seconds"></span> segundos.</h4>
         </div>
-        <article>
-            <h3>O banco de dados foi desabilitado temporariamente,<br> segunda-feira eu retorno ele :)</h3>
-            <!--div class="auth">
+        <article class="login-article">
+            <div class="auth">
                 <label for="user">Usuário:</label>
                 <input type="text" id="user">
                 <label for="pass">Senha:</label>
                 <input type="text" id="pass">
             </div>
-            <button class="auth-button">Entrar</button-->
+            <button class="auth-button">Entrar</button>
         </article>
         <main>
             <div class="filter-controller">
@@ -69,13 +68,56 @@
                         <th>Contato</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="user-tbody">
                 </tbody>
                 <tfoot>
                     <td colspan="7"><b>Os tickets acabam aqui</b></td>
                 </tfoot>
             </table>
+            <article class="admin-article">
+                <div class="auth">
+                    <label for="user">Usuário:</label>
+                    <input type="text" id="adminUserName">
+                    <label for="pass">Senha:</label>
+                    <input type="text" id="adminPass">
+                </div>
+                <button class="admin-button">Entrar</button>
+            </article>
+            <p class="userToken" style="display: none;"></p>
         </main>
+        <section>
+            <div class="admin-filter-controller">
+                <div class="admin-select-container">
+                    <select class="admin-action">
+                        <option>- Selecione uma ação -</option>
+                        <option>Buscar usuários</option>
+                        <option>Criar usuário</option>
+                        <option>Deletar usuário</option>
+                    </select>
+                    <input type="text" class="admin-argument" placeholder=" Aguardando comandos" disabled>
+                </div>
+                <div class="admin-data">
+                    <input type="text" class="admin-c-email" placeholder=" Aguardando comandos" disabled>
+                    <input type="text" class="admin-c-password" placeholder=" Aguardando comandos" disabled>
+                </div>
+                <button class="admin-apply">Aplicar</button>
+            </div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Senha</th>
+                    </tr>
+                </thead>
+                <tbody class="admin-tbody">
+                </tbody>
+                <tfoot>
+                    <td colspan="3"><b>Os usuários acabam aqui</b></td>
+                </tfoot>
+            </table>
+            <p class="adminToken" style="display: none;"></p>
+        </section>
         <script type="module" src="./js/script.js"></script>
     </body>
 </html>

@@ -1,12 +1,12 @@
 const main = document.querySelector("main")
 const alert = document.querySelector(".alert")
 const seconds = document.querySelector(".seconds")
-const article = document.querySelector("article")
+const article = document.querySelector(".login-article")
 const userName = document.querySelector("#user")
 const pass = document.querySelector("#pass")
 const message = "543210"
 let i = 0;
-/*
+
 function typing(){
     alert.style.display = "block"
     if (i < message.length){
@@ -18,23 +18,28 @@ function typing(){
 
 async function validation() {
     let userData = {user: userName.value, password: pass.value}
-    await fetch('https://sword-of-the-abyss-api.herokuapp.com/ticket/users', {
+    await fetch('http://localhost:3000/user/login', {
         method: 'POST', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(userData)
     }).then(response => response.json()).then(data => data.map(() => {
-        if(data[0] === "Denied"){
+        if(data[0] === "Falha na autenticação"){
             typing()
             setTimeout(() => {location.reload()}, 5500)
         }else{
             article.style.display = "none"
             main.style.display = "flex"
+            const userToken = document.querySelector(".userToken")
+            userToken.innerHTML = data[0]
             const action = document.querySelector(".action")
             const filter = document.querySelector(".filter")
             const ticketStatus = document.querySelector(".status")
             const tag = document.querySelector(".tag")
             const argument = document.querySelector(".argument")
             const apply = document.querySelector(".apply")
-
+            const adminArticle = document.querySelector(".admin-article")
+            const adminUserName = document.querySelector("#adminUserName")
+            const adminPass = document.querySelector("#adminPass")
+            const section = document.querySelector("section")
             action.addEventListener("change", () => {
                 switch(action.value) {
                     case "Buscar":
@@ -127,7 +132,7 @@ async function validation() {
 
             apply.addEventListener("click", async() => {
                 let url = "https://sword-of-the-abyss-api.herokuapp.com/ticket/" 
-                let params = {}
+                let params = {Authorization: `${userToken.value}`}
                 switch(action.value) {
                     case "Buscar":
                         switch(filter.value){
@@ -149,18 +154,19 @@ async function validation() {
                     break
                     case "Editar Status":
                         let ticketData = {status: `${ticketStatus.value}`}
-                        await fetch(`${url}${argument.value}`, {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(ticketData)})
+                        await fetch(`${url}${argument.value}`, {method: 'PUT', headers: {'Authorization': `${userToken.value}`, 'Content-Type': 'application/json'}, body: JSON.stringify(ticketData)})
                     break
-                    case "Deletar":  argument.placeholder = "  Por segurança os métodos de deletar estão desativados";argument.setAttribute("disabled", "disabled") 
-                        //if (argument.value == null){await fetch(url, {method: 'TRUNCATE'})
-                        //}else{await fetch(`${url}${argument.value}`, {method: 'DELETE'})}
+                    case "Deletar":
+                        if (argument.value !== ""){
+                        if (argument.value === "Todos"){await fetch(url, {method: 'DELETE', headers: {'Authorization': `${userToken.value}`}})
+                        }else{await fetch(`${url}${argument.value}`, {method: 'DELETE', headers: {'Authorization': `${userToken.value}`}})}}
                     break
                     default:
                         url = null
                     break
                 } 
                 fetch(url, params).then(response => response.json()).then(ticket =>
-                    document.querySelector("tbody").innerHTML = ticket.reduce((accumulator, obj) => {
+                    document.querySelector(".user-tbody").innerHTML = ticket.reduce((accumulator, obj) => {
                         const data = new Date(Date.parse(obj.data))
                         let day = data.getDate()
                         let month = data.getMonth()
@@ -180,10 +186,114 @@ async function validation() {
                     },"")
                 )
             })
+
+            // login usersssssssssssssssssssssssssssssss
+            async function adminValidation() {
+                let userData = {user: adminUserName.value, password: adminPass.value}
+                await fetch('http://localhost:3000/user/login-admin', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(userData)
+                }).then(response => response.json()).then(data => data.map(() => {
+                    if(data[0] === "Falha na autenticação"){
+                        typing()
+                        setTimeout(() => {location.reload()}, 5500)
+                    }else{
+                        adminArticle.style.display = "none"
+                        main.style.display = "none"
+                        section.style.display = "flex"
+                        const adminToken = document.querySelector(".adminToken")
+                        adminToken.innerHTML = data[0]
+                        const adminAction = document.querySelector(".admin-action")
+                        const adminArgument = document.querySelector(".admin-argument")
+                        const adminCEmail = document.querySelector(".admin-c-email")
+                        const adminCPassword = document.querySelector(".admin-c-password")
+                        const adminApply = document.querySelector(".admin-apply")
+                        adminAction.addEventListener("change", () => {
+                            switch(adminAction.value){
+                                case "Buscar usuários":
+                                    adminArgument.placeholder = " Buscar todos os usuários"
+                                    adminCEmail.placeholder = " Aguardando comandos"
+                                    adminCPassword.placeholder = " Aguardando comandos"
+                                    adminCEmail.setAttribute("disabled", "disabled")
+                                    adminCPassword.setAttribute("disabled", "disabled")
+                                    adminArgument.setAttribute("disabled", "disabled")
+                                break
+                                case "Criar usuário":
+                                    adminArgument.placeholder = " Criar usuário"
+                                    adminCEmail.placeholder = " Insira o email"
+                                    adminCPassword.placeholder = " Insira a senha"
+                                    adminCEmail.removeAttribute("disabled")
+                                    adminCPassword.removeAttribute("disabled")
+                                    adminArgument.setAttribute("disabled", "disabled")
+                                break
+                                case "Deletar usuário":
+                                    adminArgument.placeholder = " Insira o id do usuário"
+                                    adminCEmail.placeholder = " Aguardando comandos"
+                                    adminCPassword.placeholder = " Aguardando comandos"
+                                    adminCEmail.setAttribute("disabled", "disabled")
+                                    adminCPassword.setAttribute("disabled", "disabled")
+                                    adminArgument.removeAttribute("disabled")
+                                break
+                                default:
+                                    adminArgument.placeholder = " Aguardando comandos"
+                                    adminCEmail.placeholder = " Aguardando comandos"
+                                    adminCPassword.placeholder = " Aguardando comandos"
+                                    adminCEmail.setAttribute("disabled", "disabled")
+                                    adminCPassword.setAttribute("disabled", "disabled")
+                                    adminArgument.setAttribute("disabled", "disabled")
+                                break
+                            }
+                        })
+                        adminApply.addEventListener("click", async () => {
+                            let adminUrl = 'http://localhost:3000/user/'
+                            let adminParams = {}
+                            switch(adminAction.value) {
+                                case "Buscar":
+                                    switch(filter.value){
+                                        case "Buscar usuários":
+                                            adminParams = {Authorization: `${userToken.value}`}
+                                        break
+                                        case "Criar usuário":
+                                            let userData = {user: `${adminCEmail.value}`, password: `${adminCPassword.value}`}
+                                            await fetch(adminUrl, {method: 'PUT', headers: {'Authorization': `${adminToken.value}`, 'Content-Type': 'application/json'}, body: JSON.stringify(userData)})
+                                        break
+                                        case "Deletar usuário":
+                                            if (adminArgument.value !== ""){
+                                            await fetch(`${adminUrl}${adminArgument.value}`, {method: 'DELETE', headers: {'Authorization': `${adminToken.value}`}})}
+                                        break
+                                        default:
+                                            adminUrl = null
+                                        break
+                                    }
+                                break
+                            }
+                            fetch(adminUrl, adminParams).then(response => response.json()).then(user =>
+                                document.querySelector(".admin-tbody").innerHTML = user.reduce((accumulator, user) => {
+                                    accumulator += `<tr>
+                                                    <td>${user.id}</td>
+                                                    <td>${user.email}</td>
+                                                    <td>${user.email}</td>
+                                                    </tr>`
+                                    return accumulator
+                                },"")
+                            )
+                        })
+                    }
+                }))
+            }
+
+            document.querySelector(".admin-section").addEventListener("click", () => {
+                adminArticle.style.display = "flex"
+            })
+
+            document.querySelector(".admin-button").addEventListener("click", () => {
+                adminValidation()
+            })
+
         }
     }))
 }
 
 document.querySelector(".auth-button").addEventListener("click", () => {
     validation()
-})*/
+})
