@@ -18,7 +18,7 @@ function typing(){
 }
 
 async function validation() {
-    let userData = {email: userName.value, password: pass.value}
+    let userData = {name: userName.value, password: pass.value}
     await fetch(`${baseUrl}user/login`, {
         method: 'POST', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(userData)
@@ -189,7 +189,7 @@ async function validation() {
             })
 
             async function adminValidation() {
-                let userData = {email: adminUserName.value, password: adminPass.value}
+                let userData = {name: adminUserName.value, password: adminPass.value}
                 await fetch(`${baseUrl}user/login-admin`, {
                     method: 'POST', headers: {'Authorization': `${userToken.innerHTML}`, 'Content-Type': 'application/json'},
                     body: JSON.stringify(userData)
@@ -205,7 +205,7 @@ async function validation() {
                         adminToken.innerHTML = data[0]
                         const adminAction = document.querySelector(".admin-action")
                         const adminArgument = document.querySelector(".admin-argument")
-                        const adminCEmail = document.querySelector(".admin-c-email")
+                        const adminCName = document.querySelector(".admin-c-name")
                         const adminCPassword = document.querySelector(".admin-c-password")
                         const adminApply = document.querySelector(".admin-apply")
                         adminAction.addEventListener("change", () => {
@@ -224,7 +224,7 @@ async function validation() {
                                 case "Criar usuário":                                   
                                     adminCPassword.placeholder = " Insira a senha"
                                     adminArgument.placeholder = " Criar usuário"
-                                    adminCEmail.placeholder = " Insira o email"
+                                    adminCEmail.placeholder = " Insira o nome"
                                     adminArgument.value = ""
                                     adminArgument.setAttribute("disabled", "disabled")
                                     adminCPassword.removeAttribute("disabled")
@@ -260,7 +260,7 @@ async function validation() {
                                 case "Buscar usuários":
                                 break
                                 case "Criar usuário":
-                                    let adminData = {email: `${adminCEmail.value}`, password: `${adminCPassword.value}`}
+                                    let adminData = {name: `${adminCName.value}`, password: `${adminCPassword.value}`}
                                     await fetch(adminUrl, {method: 'POST', headers: {'Authorization': `${adminToken.innerHTML}`, 'Content-Type': 'application/json'}, body: JSON.stringify(adminData)})
                                 break
                                 case "Deletar usuário":
@@ -275,8 +275,8 @@ async function validation() {
                                 document.querySelector(".admin-tbody").innerHTML = users.reduce((accumulator, user) => {
                                     accumulator += `<tr>
                                                     <td>${user.id}</td>
-                                                    <td>${user.email}</td>
-                                                    <td>${user.email}</td>
+                                                    <td>${user.name}</td>
+                                                    <td>${user.password}</td>
                                                     </tr>`
                                     return accumulator
                                 },"")
