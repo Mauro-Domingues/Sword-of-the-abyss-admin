@@ -213,43 +213,43 @@ async function validation() {
                                 case "Buscar usuários":
                                     adminCPassword.placeholder = " Aguardando comandos"
                                     adminArgument.placeholder = " Buscar todos os usuários"
-                                    adminCEmail.placeholder = " Aguardando comandos" 
+                                    adminCName.placeholder = " Aguardando comandos" 
                                     adminCPassword.value = ""
                                     adminArgument.value = ""
-                                    adminCEmail.value = ""  
-                                    adminCEmail.setAttribute("disabled", "disabled")
+                                    adminCName.value = ""  
+                                    adminCName.setAttribute("disabled", "disabled")
                                     adminCPassword.setAttribute("disabled", "disabled")
                                     adminArgument.setAttribute("disabled", "disabled")
                                 break
                                 case "Criar usuário":                                   
                                     adminCPassword.placeholder = " Insira a senha"
                                     adminArgument.placeholder = " Criar usuário"
-                                    adminCEmail.placeholder = " Insira o nome"
+                                    adminCName.placeholder = " Insira o nome"
                                     adminArgument.value = ""
                                     adminArgument.setAttribute("disabled", "disabled")
                                     adminCPassword.removeAttribute("disabled")
-                                    adminCEmail.removeAttribute("disabled")  
+                                    adminCName.removeAttribute("disabled")  
                                 break
                                 case "Deletar usuário":
                                     adminCPassword.placeholder = " Aguardando comandos" 
                                     adminArgument.placeholder = " Insira o id do usuário"
-                                    adminCEmail.placeholder = " Aguardando comandos"
+                                    adminCName.placeholder = " Aguardando comandos"
                                     adminCPassword.value = ""
-                                    adminCEmail.value = ""                                 
+                                    adminCName.value = ""                                 
                                     adminCPassword.setAttribute("disabled", "disabled")
-                                    adminCEmail.setAttribute("disabled", "disabled")
+                                    adminCName.setAttribute("disabled", "disabled")
                                     adminArgument.removeAttribute("disabled")
                                 break
                                 default:
                                     adminCPassword.placeholder = " Aguardando comandos"
                                     adminArgument.placeholder = " Aguardando comandos"
-                                    adminCEmail.placeholder = " Aguardando comandos"                                   
+                                    adminCName.placeholder = " Aguardando comandos"                                   
                                     adminCPassword.value = ""
                                     adminArgument.value = ""
-                                    adminCEmail.value = ""                                    
+                                    adminCName.value = ""                                    
                                     adminCPassword.setAttribute("disabled", "disabled")
                                     adminArgument.setAttribute("disabled", "disabled")
-                                    adminCEmail.setAttribute("disabled", "disabled")
+                                    adminCName.setAttribute("disabled", "disabled")
                                 break
                             }
                         })
