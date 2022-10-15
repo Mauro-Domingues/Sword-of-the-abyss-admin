@@ -168,16 +168,10 @@ async function validation() {
                 } 
                 fetch(url, params).then(response => response.json()).then(ticket =>
                     document.querySelector(".user-tbody").innerHTML = ticket.reduce((accumulator, obj) => {
-                        const date = new Date(Date.parse(obj.date))
-                        let day = date.getDate()
-                        let month = date.getMonth()
-                        const year = date.getFullYear()
-                        day < 10 ? day = `0${day}` : false	
-                        month < 10 ? month = `0${month}` : false
                         accumulator += `<tr>
                                         <td>${obj.id}</td>
                                         <td>${obj.title}</td>
-                                        <td>${day}/${month}/${year}</td>
+                                        <td>${new Date(obj.date).toLocaleDateString()}</td>
                                         <td>${obj.type}</td>
                                         <td class="${obj.status} stn">${obj.status}</td>
                                         <td class="description"><details><summary>Exibir descrição completa</summary>${obj.description}</details></td>
